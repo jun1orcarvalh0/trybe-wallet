@@ -11,6 +11,14 @@ class WalletForm extends Component {
 
   render() {
     const { currencies } = this.props;
+    const currenciesHtmlElements = currencies.map((currency) => (
+      <option
+        key={ currency }
+        value={ currency }
+      >
+        {currency}
+      </option>
+    ));
     return (
       <div>
         <form>
@@ -27,21 +35,7 @@ class WalletForm extends Component {
             data-testid="description-input"
           />
           <select name="expenseCurrency" data-testid="currency-input" id="">
-            <option value={ currencies[0] }>USD</option>
-            <option value={ currencies[1] }>CAD</option>
-            <option value={ currencies[2] }>GBP</option>
-            <option value={ currencies[3] }>ARS</option>
-            <option value={ currencies[4] }>BTC</option>
-            <option value={ currencies[5] }>LTC</option>
-            <option value={ currencies[6] }>EUR</option>
-            <option value={ currencies[7] }>JPY</option>
-            <option value={ currencies[8] }>CHF</option>
-            <option value={ currencies[9] }>AUD</option>
-            <option value={ currencies[10] }>CNY</option>
-            <option value={ currencies[11] }>ILS</option>
-            <option value={ currencies[12] }>ETH</option>
-            <option value={ currencies[13] }>XRP</option>
-            <option value={ currencies[14] }>DOGE</option>
+            { currenciesHtmlElements }
           </select>
           <select name="paymentMethod" data-testid="method-input" id="">
             <option value="money">Dinheiro</option>
