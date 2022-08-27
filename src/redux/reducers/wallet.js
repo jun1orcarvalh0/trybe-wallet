@@ -13,7 +13,10 @@ const wallet = (state = INITIAL_STATE, action) => {
   case SAVE_USERWALLET:
     return {
       ...state,
-      currencies: action.userWallet,
+      currencies: action.userWallet.currencies,
+      expenses: action.userWallet.expenses,
+      editor: action.userWallet.expenses,
+      idToEdit: action.userWallet.expenses,
     };
   default:
     return state;
