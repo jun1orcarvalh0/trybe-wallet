@@ -65,6 +65,7 @@ class WalletForm extends Component {
           <label htmlFor="expenseValue">
             Valor:
             <input
+              label="Valor: "
               type="text"
               name="value"
               id="expenseValue"
@@ -81,6 +82,7 @@ class WalletForm extends Component {
               id="currency"
               onChange={ this.handleChange }
               value={ currency }
+              options={ currenciesHtmlElements }
             >
               { currenciesHtmlElements }
             </select>
@@ -100,6 +102,7 @@ class WalletForm extends Component {
             </select>
           </label>
           <label htmlFor="category">
+            Categoria:
             <select
               name="tag"
               data-testid="tag-input"
