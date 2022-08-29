@@ -13,7 +13,7 @@ class Header extends Component {
 
     const totalOfExpenses = expenses.length > 0
       ? Math.round(findExpenseAsk.reduce((acc, curr) => acc + curr) * 100) / 100
-      : 0;
+      : Number(0).toFixed(2);
 
     return (
       <div>

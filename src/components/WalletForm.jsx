@@ -136,7 +136,7 @@ class WalletForm extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  requestCurrencies: async () => {
+  requestCurrencies: () => {
     dispatch(fetchCurrenciesAPI());
   },
   dispatchExpense: (expense) => dispatch(saveUserExpense(expense)),
