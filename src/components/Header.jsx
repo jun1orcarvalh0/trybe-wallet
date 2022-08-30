@@ -16,12 +16,12 @@ class Header extends Component {
       : Number(0).toFixed(2);
 
     return (
-      <div>
-        <section>
+      <div className="header navbar">
+        <section className="header-user-email">
           <h3>Usuario:</h3>
           <h3 data-testid="email-field">{ email }</h3>
         </section>
-        <section>
+        <section className="header-user-total-expense navbar-end">
           <h3>Despesa total:</h3>
           <h4 data-testid="total-field">{totalOfExpenses}</h4>
           <h4 data-testid="header-currency-field">BRL</h4>

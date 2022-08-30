@@ -322,7 +322,7 @@ describe('Tests in React-Redux', () => {
       const currentStore = store.getState();
       console.log(currentStore);
     });
-    it('Test clicks on dele button, removes the expense', async () => {
+    it('Test clicks on delete button, removes the expense', async () => {
       const { store } = renderWithRouterAndRedux(
         <App />,
         { initialEntries: [pathWallet],
@@ -341,10 +341,68 @@ describe('Tests in React-Redux', () => {
 
       console.log(store.getState());
 
-      const editOrRemoveButtons = screen.getByRole('button', { name: /deletar/i });
+      const removeButtons = screen.getByRole('button', { name: /deletar/i });
 
-      userEvent.click(editOrRemoveButtons);
+      userEvent.click(removeButtons);
       console.log(store.getState());
+    });
+    it('Test if clicks on edit button, forms button changes', async () => {
+      renderWithRouterAndRedux(
+        <App />,
+        { initialEntries: [pathWallet],
+          initialState: INITIAL_STATE },
+      );
+
+      const inputValue = screen.getByRole('textbox', { name: /valor/i });
+      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const submitButton = screen.getByRole('button', { name: /adicionar/i });
+
+      userEvent.type(inputValue, '20');
+      userEvent.type(inputDescription, 'BurguerKing');
+      userEvent.click(submitButton);
+
+      await waitFor(() => expect(fetchMock.called).toBeTruthy());
+
+      const editButton = screen.getByRole('button', { name: 'Editar' });
+
+      userEvent.click(editButton);
+
+      const editExpenseButton = screen.getByRole('button', { name: 'Editar Despesa' });
+
+      expect(editButton).toBeInTheDocument();
+      expect(editExpenseButton).toBeInTheDocument();
+    });
+    it('Test changing info of a created expense', async () => {
+      renderWithRouterAndRedux(
+        <App />,
+        { initialEntries: [pathWallet],
+          initialState: INITIAL_STATE },
+      );
+
+      const inputValue = screen.getByRole('textbox', { name: /valor/i });
+      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const submitButton = screen.getByRole('button', { name: /adicionar/i });
+
+      userEvent.type(inputValue, '20');
+      userEvent.type(inputDescription, 'BurguerKing');
+      userEvent.click(submitButton);
+
+      await waitFor(() => expect(fetchMock.called).toBeTruthy());
+
+      const editButton = screen.getByRole('button', { name: 'Editar' });
+
+      userEvent.click(editButton);
+
+      const editExpenseButton = screen.getByRole('button', { name: 'Editar Despesa' });
+
+      expect(editButton).toBeInTheDocument();
+      expect(editExpenseButton).toBeInTheDocument();
+
+      userEvent.type(inputValue, '40');
+      userEvent.type(inputDescription, 'MacDonalds');
+      userEvent.click(editExpenseButton);
+
+      expect(submitButton).toBeInTheDocument();
     });
   });
 });

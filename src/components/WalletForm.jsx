@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import fetchExchangeRates from '../services/fetchApi';
 import
 { fetchCurrenciesAPI,
-  fetchExchangeRates,
   saveUserExpense,
+  editedUserExpense,
 }
   from '../redux/actions';
 
@@ -30,25 +31,25 @@ class WalletForm extends Component {
 
   handleExpenseSubmit = async (event) => {
     event.preventDefault();
-    const { dispatchExpense } = this.props;
+    const { dispatchExpense, id, editor, expenseWasEdited } = this.props;
     const requestApi = await fetchExchangeRates();
     this.setState({
       exchangeRates: requestApi,
     }, () => {
-      dispatchExpense({ ...this.state });
-      this.setState((prevState) => ({
-        id: prevState.id + 1,
+      if (editor) expenseWasEdited({ ...this.state, id });
+      else dispatchExpense({ ...this.state, id });
+      this.setState({
         value: '',
         method: 'Dinheiro',
         tag: 'Alimentação',
         description: '',
         exchangeRates: 0,
-      }));
+      });
     });
   };
 
   render() {
-    const { apiCurrencies } = this.props;
+    const { apiCurrencies, editor } = this.props;
     const { value, description, currency, method, tag } = this.state;
 
     const currenciesHtmlElements = apiCurrencies.map((apiCurrency, index) => (
@@ -61,7 +62,7 @@ class WalletForm extends Component {
     ));
     return (
       <div>
-        <form onSubmit={ this.handleExpenseSubmit }>
+        <form>
           <label htmlFor="expenseValue">
             Valor:
             <input
@@ -128,7 +129,19 @@ class WalletForm extends Component {
               value={ description }
             />
           </label>
-          <button type="submit">Adicionar Despesa</button>
+          { editor
+            ? (
+              <button type="button" onClick={ this.handleExpenseSubmit }>
+                Editar Despesa
+              </button>
+            )
+            : (
+              <button
+                type="submit"
+                onClick={ this.handleExpenseSubmit }
+              >
+                Adicionar Despesa
+              </button>)}
         </form>
       </div>
     );
@@ -140,16 +153,22 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCurrenciesAPI());
   },
   dispatchExpense: (expense) => dispatch(saveUserExpense(expense)),
+  expenseWasEdited: (expenseEdited) => dispatch(editedUserExpense(expenseEdited)),
 });
 
-const mapStateToProps = (state) => ({
-  apiCurrencies: state.wallet.currencies,
+const mapStateToProps = ({ wallet }) => ({
+  apiCurrencies: wallet.currencies,
+  editor: wallet.editor,
+  id: wallet.editor ? wallet.idToEdit : wallet.expenses.length,
 });
 
 WalletForm.propTypes = {
   requestCurrencies: PropTypes.func.isRequired,
   dispatchExpense: PropTypes.func.isRequired,
   apiCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editor: PropTypes.bool.isRequired,
+  expenseWasEdited: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
