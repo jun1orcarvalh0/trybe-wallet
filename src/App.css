@@ -1,23 +1,3 @@
-/* stylelint-disable indentation */
-:root {
-
-  --primary: #ea40a4;
-
-  --business: #3a82ee;
-
-  --personal: var(--primary);
-
-	--light: #eee;
-
-	--grey: rgb(136, 136, 136);
-
-	--dark: #313154;
-
-	--danger: #ff5b57;
-
-	--shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
 * {
   box-sizing: border-box;
   font-family: Montserrat, sans-serif;
@@ -46,7 +26,7 @@ body {
   align-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 2vh;
@@ -74,7 +54,7 @@ body {
 }
 
 .login-button {
-  background-color: var(--dark);
+  background-color: #313154;
   border-radius: 0.25rem;
   color: white;
   cursor: pointer;
@@ -83,7 +63,7 @@ body {
 }
 
 .header {
-  background-color: var(--dark);
+  background-color: #313154;
   height: 10vh;
   padding: 20px;
 }
@@ -117,7 +97,7 @@ body {
 
 .wallet-form {
   align-items: center;
-  background-color: var(--dark);
+  background-color: #313154;
   border-radius: 0.5rem;
   color: white;
   display: flex;
@@ -127,7 +107,7 @@ body {
 }
 
 .tr-header th {
-  background-color: var(--dark);
+  background-color: #313154;
   color: white;
   text-align: center;
 }
