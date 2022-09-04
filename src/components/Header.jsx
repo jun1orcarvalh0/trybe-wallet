@@ -18,7 +18,7 @@ class Header extends Component {
     return (
       <div className="header navbar">
         <section className="header-user-email">
-          <h3>Usuario:</h3>
+          <h3>Usuário:</h3>
           <h3 data-testid="email-field">{ email }</h3>
         </section>
         <section className="header-user-total-expense navbar-end">

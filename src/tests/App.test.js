@@ -36,6 +36,9 @@ describe('Tests in React-Redux', () => {
     'DOGE',
   ];
 
+  const INPUT_TESTID = 'value-input';
+  const DESCRIPTION_TESTID = 'description-input';
+
   const foodCategory = 'Alimentação';
 
   const INITIAL_STATE = {
@@ -56,11 +59,13 @@ describe('Tests in React-Redux', () => {
   const category = foodCategory;
   const description = 'McDonalds';
 
+  const editExpense = 'Editar Despesa';
+
   describe('Test the login page', () => {
     it('Test rendering and initial values', () => {
       renderWithRouterAndRedux(<App />, { initialEntries: [pathLogin] });
 
-      const inputEmail = screen.getByLabelText(/email/i);
+      const inputEmail = screen.getByTestId(/email/i);
       const inputPassword = screen.getByLabelText(/password/i);
       const submitButton = screen.getByRole('button', { name: /entrar/i });
 
@@ -138,11 +143,11 @@ describe('Tests in React-Redux', () => {
         { initialEntries: [pathWallet] },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const selectCurrency = screen.getByRole('combobox', { name: /moeda/i });
-      const selectPayment = screen.getByRole('combobox', { name: /método de pagamento/i });
-      const selectTag = screen.getByRole('combobox', { name: /categoria/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const selectCurrency = screen.getByTestId('currency-input');
+      const selectPayment = screen.getByTestId('method-input');
+      const selectTag = screen.getByTestId('tag-input');
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       expect(inputValue).toBeInTheDocument();
@@ -158,11 +163,11 @@ describe('Tests in React-Redux', () => {
         { initialEntries: [pathWallet], initialState: INITIAL_STATE },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const selectCurrency = screen.getByRole('combobox', { name: /moeda/i });
-      const selectPayment = screen.getByRole('combobox', { name: /método de pagamento/i });
-      const selectTag = screen.getByRole('combobox', { name: /categoria/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const selectCurrency = screen.getByTestId('currency-input');
+      const selectPayment = screen.getByTestId('method-input');
+      const selectTag = screen.getByTestId('tag-input');
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
 
       userEvent.type(inputValue, value);
       userEvent.selectOptions(selectCurrency, 'EUR');
@@ -194,8 +199,8 @@ describe('Tests in React-Redux', () => {
       },
       ];
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
       fetchMock.mock('https://economia.awesomeapi.com.br/json/all', mockData);
 
@@ -238,8 +243,8 @@ describe('Tests in React-Redux', () => {
       },
       ];
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       userEvent.type(inputValue, '20');
@@ -284,14 +289,14 @@ describe('Tests in React-Redux', () => {
       expect(tableEditOrRemove).toBeInTheDocument();
     });
     it('Test if add expense, shows it on the Table', async () => {
-      const { store } = renderWithRouterAndRedux(
+      renderWithRouterAndRedux(
         <App />,
         { initialEntries: [pathWallet],
           initialState: INITIAL_STATE },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       userEvent.type(inputValue, '20');
@@ -319,8 +324,6 @@ describe('Tests in React-Redux', () => {
       expect(convertedValueOfExpense).toBeInTheDocument();
       expect(tableConvertCurrency).toBeInTheDocument();
       expect(editOrRemoveButtons).toBeInTheDocument();
-      const currentStore = store.getState();
-      console.log(currentStore);
     });
     it('Test clicks on delete button, removes the expense', async () => {
       const { store } = renderWithRouterAndRedux(
@@ -329,8 +332,8 @@ describe('Tests in React-Redux', () => {
           initialState: INITIAL_STATE },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       userEvent.type(inputValue, '20');
@@ -353,8 +356,8 @@ describe('Tests in React-Redux', () => {
           initialState: INITIAL_STATE },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       userEvent.type(inputValue, '20');
@@ -367,7 +370,7 @@ describe('Tests in React-Redux', () => {
 
       userEvent.click(editButton);
 
-      const editExpenseButton = screen.getByRole('button', { name: 'Editar Despesa' });
+      const editExpenseButton = screen.getByRole('button', { name: editExpense });
 
       expect(editButton).toBeInTheDocument();
       expect(editExpenseButton).toBeInTheDocument();
@@ -379,8 +382,8 @@ describe('Tests in React-Redux', () => {
           initialState: INITIAL_STATE },
       );
 
-      const inputValue = screen.getByRole('textbox', { name: /valor/i });
-      const inputDescription = screen.getByRole('textbox', { name: /Descrição:/i });
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
       const submitButton = screen.getByRole('button', { name: /adicionar/i });
 
       userEvent.type(inputValue, '20');
@@ -393,9 +396,47 @@ describe('Tests in React-Redux', () => {
 
       userEvent.click(editButton);
 
-      const editExpenseButton = screen.getByRole('button', { name: 'Editar Despesa' });
+      const editExpenseButton = screen.getByRole('button', { name: editExpense });
 
       expect(editButton).toBeInTheDocument();
+      expect(editExpenseButton).toBeInTheDocument();
+
+      userEvent.type(inputValue, '40');
+      userEvent.type(inputDescription, 'MacDonalds');
+      userEvent.click(editExpenseButton);
+
+      expect(submitButton).toBeInTheDocument();
+    });
+    it('Test changing info of a created expense, and the other not edited stay the same', async () => {
+      renderWithRouterAndRedux(
+        <App />,
+        { initialEntries: [pathWallet],
+          initialState: INITIAL_STATE },
+      );
+
+      const inputValue = screen.getByTestId(INPUT_TESTID);
+      const inputDescription = screen.getByTestId(DESCRIPTION_TESTID);
+      const submitButton = screen.getByRole('button', { name: /adicionar/i });
+
+      userEvent.type(inputValue, '20');
+      userEvent.type(inputDescription, 'BurguerKing');
+      userEvent.click(submitButton);
+
+      await waitFor(() => expect(fetchMock.called).toBeTruthy());
+
+      userEvent.type(inputValue, '30');
+      userEvent.type(inputDescription, 'McDonalds');
+      userEvent.click(submitButton);
+
+      await waitFor(() => expect(fetchMock.called).toBeTruthy());
+
+      const editButton = screen.getAllByRole('button', { name: 'Editar' });
+
+      userEvent.click(editButton[0]);
+
+      const editExpenseButton = screen.getByRole('button', { name: editExpense });
+
+      expect(editButton[0]).toBeInTheDocument();
       expect(editExpenseButton).toBeInTheDocument();
 
       userEvent.type(inputValue, '40');

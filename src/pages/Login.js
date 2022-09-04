@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveUserEmail } from '../redux/actions';
+import walletIcon from '../images/wallet-icon2.png';
 
 class Login extends React.Component {
   state = {
@@ -41,27 +42,32 @@ class Login extends React.Component {
     const { email, password, isButtonDisabled } = this.state;
     return (
       <div className="login-form-container">
-        <form className="form login-form box " onSubmit={ this.handleSubmit }>
-          <h3 className="title is-2 login-form-title">TrybeWallet</h3>
-          <div className="field control">
+        <form className="login-form" onSubmit={ this.handleSubmit }>
+          <h3 className="login-form-title">TrybeWallet</h3>
+          <img
+            src={ walletIcon }
+            alt="Wallet Coin"
+            className="login-image"
+          />
+          <div className="login-form-inputs">
             <label htmlFor="email">
               Email:
               <input
                 type="text"
                 id="email"
+                className="form-control"
                 data-testid="email-input"
                 name="email"
                 value={ email }
                 onChange={ this.handleChange }
               />
             </label>
-          </div>
-          <div className="field control">
             <label htmlFor="password">
               Password:
               <input
                 type="password"
                 id="password"
+                className="form-control"
                 data-testid="password-input"
                 name="password"
                 value={ password }
@@ -71,7 +77,7 @@ class Login extends React.Component {
           </div>
           <button
             type="submit"
-            className="button is-success"
+            className="login-button"
             disabled={ isButtonDisabled }
           >
             Entrar

@@ -1,37 +1,149 @@
+/* stylelint-disable indentation */
+:root {
+
+  --primary: #ea40a4;
+
+  --business: #3a82ee;
+
+  --personal: var(--primary);
+
+	--light: #eee;
+
+	--grey: rgb(136, 136, 136);
+
+	--dark: #313154;
+
+	--danger: #ff5b57;
+
+	--shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+  color: #313154;
+  max-width: 100%;
+}
+
 .login-form-container {
+  align-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 90vh;
   justify-content: center;
+  width: 100%;
 }
 
 .login-form {
   align-content: center;
   align-items: center;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 2vh;
   padding: 30px;
   width: 300px;
 }
 
 .login-form-title {
+  font-size: 2.5rem;
   text-align: center;
 }
 
+.login-form-inputs {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-image {
+  height: 80px;
+  padding: 0;
+}
+
+.login-button {
+  background-color: var(--dark);
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 6px 36px;
+}
+
 .header {
-  background-color: rgb(27, 150, 109);
+  background-color: var(--dark);
+  height: 10vh;
   padding: 20px;
 }
 
 .header-user-email {
   align-items: center;
+  color: white;
   display: flex;
-  gap: 0.5vh;
+  font-size: 1.25rem;
+  font-weight: 700;
+  gap: 1vh;
 }
 
 .header-user-total-expense {
+  align-items: center;
+  color: white;
   display: flex;
+  font-size: 1.25rem;
   gap: 0.5vh;
+}
+
+
+.wallet-form-container {
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  padding: 40px;
+}
+
+.wallet-form {
+  align-items: center;
+  background-color: var(--dark);
+  border-radius: 0.5rem;
+  color: white;
+  display: flex;
+  height: 10vh;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.tr-header th {
+  background-color: var(--dark);
+  color: white;
+  text-align: center;
+}
+
+.tr-table td {
+  align-content: center;
+  height: 40px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.buttons-td {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  gap: 2vh;
+  height: 30px;
+  justify-content: center;
 }

@@ -26,7 +26,7 @@ class Table extends Component {
       const askRound = Math.round(ask * 100) / 100;
       const valueConverted = Math.round((value * ask) * 100) / 100;
       return (
-        <tr key={ expense.id }>
+        <tr key={ expense.id } className="tr-table">
           <td>{expense.description}</td>
           <td>{expense.tag}</td>
           <td>{expense.method}</td>
@@ -36,29 +36,33 @@ class Table extends Component {
           <td>{valueConverted}</td>
           <td>Real</td>
           <td>
-            <button
-              type="submit"
-              onClick={ () => this.handleRemove(expense) }
-              data-testid="delete-btn"
-            >
-              Deletar
-            </button>
-            <button
-              type="submit"
-              onClick={ () => this.handleEditButton(expense) }
-              data-testid="edit-btn"
-            >
-              Editar
-            </button>
+            <div className="buttons-td">
+              <button
+                type="submit"
+                onClick={ () => this.handleEditButton(expense) }
+                className="btn btn-warning"
+                data-testid="edit-btn"
+              >
+                Editar
+              </button>
+              <button
+                type="submit"
+                onClick={ () => this.handleRemove(expense) }
+                className="btn btn-danger"
+                data-testid="delete-btn"
+              >
+                Deletar
+              </button>
+            </div>
           </td>
         </tr>
       );
     });
     return (
-      <div>
-        <table>
+      <div className="table-container">
+        <table className="table">
           <thead>
-            <tr>
+            <tr className="tr-header">
               <th>Descrição</th>
               <th>Tag</th>
               <th>Método de pagamento</th>

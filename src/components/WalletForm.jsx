@@ -61,23 +61,23 @@ class WalletForm extends Component {
       </option>
     ));
     return (
-      <div>
-        <form>
-          <label htmlFor="expenseValue">
-            Valor:
+      <div className="wallet-form-container">
+        <form className="wallet-form">
+          <div className="field">
             <input
-              label="Valor: "
+              className="form-control"
               type="text"
               name="value"
               id="expenseValue"
               data-testid="value-input"
+              placeholder="Adicione um valor"
               onChange={ this.handleChange }
               value={ value }
             />
-          </label>
-          <label htmlFor="currency">
-            Moeda:
+          </div>
+          <div className="select is-normal">
             <select
+              className="form-select"
               name="currency"
               data-testid="currency-input"
               id="currency"
@@ -87,10 +87,10 @@ class WalletForm extends Component {
             >
               { currenciesHtmlElements }
             </select>
-          </label>
-          <label htmlFor="payment">
-            Método de pagamento:
+          </div>
+          <div>
             <select
+              className="form-select"
               name="method"
               data-testid="method-input"
               id="payment"
@@ -101,10 +101,10 @@ class WalletForm extends Component {
               <option value="Cartão de crédito">Cartão de crédito</option>
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
-          </label>
-          <label htmlFor="category">
-            Categoria:
+          </div>
+          <div className="select is-normal">
             <select
+              className="form-select"
               name="tag"
               data-testid="tag-input"
               id="category"
@@ -117,27 +117,33 @@ class WalletForm extends Component {
               <option value="Transporte">Transporte</option>
               <option value="Saúde">Saúde</option>
             </select>
-          </label>
-          <label htmlFor="expenseDescription">
-            Descrição:
+          </div>
+          <div className="field">
             <input
+              className="form-control"
               type="text"
               name="description"
               id="expenseDescription"
               data-testid="description-input"
+              placeholder="Adicione uma descrição"
               onChange={ this.handleChange }
               value={ description }
             />
-          </label>
+          </div>
           { editor
             ? (
-              <button type="button" onClick={ this.handleExpenseSubmit }>
+              <button
+                type="button"
+                className="btn btn-light"
+                onClick={ this.handleExpenseSubmit }
+              >
                 Editar Despesa
               </button>
             )
             : (
               <button
                 type="submit"
+                className="btn btn-light"
                 onClick={ this.handleExpenseSubmit }
               >
                 Adicionar Despesa
