@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
   editor: false, // valor booleano que indica de uma despesa está sendo editada
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
+  expenseToBeEdited: {},
 };
 
 const mapEditedExpense = (state, action) => {
@@ -20,6 +21,7 @@ const mapEditedExpense = (state, action) => {
   return {
     ...state,
     expenses,
+    editor: false,
   };
 };
 
@@ -45,6 +47,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       editor: true,
       idToEdit: action.expenseToBeEdited.id,
+      expenseToBeEdited: action.expenseToBeEdited,
     };
   case EDITED_USEREXPENSE:
     return mapEditedExpense(state, action);

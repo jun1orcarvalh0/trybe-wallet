@@ -53,12 +53,33 @@ body {
   padding: 0;
 }
 
-.login-button {
+.login-button:disabled {
   background-color: #313154;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   color: white;
   cursor: pointer;
   font-size: 0.9rem;
+  opacity: 0.6;
+  padding: 6px 36px;
+}
+
+.login-button:enabled {
+  background-color: #313154;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  padding: 6px 36px;
+}
+
+.login-button:hover {
+  background-color: #313154;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 1;
   padding: 6px 36px;
 }
 
