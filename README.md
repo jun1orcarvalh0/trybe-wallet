@@ -7,8 +7,8 @@
 - Desenvolvido por: [Júnior Carvalho](https://www.linkedin.com/in/juniorcarvalh0)
 - Demostração: [TrybeWallet](https://jun1orcarvalh0.github.io/trybe-wallet/#/)
 
-![TrybeWallet Login](./images/login.png)
-![TrybeWallet Wallet](./images/wallet.png)
+![TrybeWallet Login](./images/trybewallet-login.png)
+![TrybeWallet Wallet](./images//trybewallet-wallet.png)
 
 ---
 
